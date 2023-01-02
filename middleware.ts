@@ -1,0 +1,3 @@
+export { default } from "next-auth/middleware";
+// secures the matching router...
+export const config = { matcher: ["/"] };
