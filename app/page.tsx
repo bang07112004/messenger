@@ -2,6 +2,7 @@ import { unstable_getServerSession } from "next-auth";
 import React from "react";
 import { Message } from "../typings";
 import ChatInPut from "./ChatInPut";
+import Header from "./Header";
 import MessageList from "./MessageList";
 import { Providers } from "./providers";
 
@@ -16,6 +17,7 @@ async function page({}: Props) {
   return (
     <Providers session={session}>
       <main className="">
+        <Header session={session} />
         {/* Message list */}
         <MessageList initialMessages={messages} />
         {/* Chat Input */}

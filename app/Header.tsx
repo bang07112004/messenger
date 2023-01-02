@@ -4,10 +4,12 @@ import goku from "../public/assets/giphy.gif";
 import Link from "next/link";
 import LogoutButton from "./LogoutButton";
 import { unstable_getServerSession } from "next-auth";
-type Props = {};
+import { getSession } from "next-auth/react";
+type Props = {
+  session: Awaited<ReturnType<typeof getSession>>;
+};
 
-async function Header({}: Props) {
-  const session = await unstable_getServerSession();
+function Header({session}: Props) {
   if (session)
     return (
       <header className="sticky z-50 bg-white top-0 flex items-center justify-between p-10 shadow-sm">
@@ -48,3 +50,12 @@ async function Header({}: Props) {
 }
 
 export default Header;
+export async function getServerSideProps(context: any) {
+  const session = await getSession(context);
+  return {
+    props:{
+      session,
+
+    }
+  }
+}
